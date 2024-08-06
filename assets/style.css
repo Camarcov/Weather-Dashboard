@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#dashboard{
+    height: 3%;
+    width: 100%;
+    background-color: aliceblue;
+    text-align: center;
+
+}
+.userSearch {
+    padding: 1%;
+    background-color: rgb(220, 245, 233);
+    border: 1px solid black;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+input {
+    background-color: aliceblue;
+    border-width: 1px;
+    height: 30px;
+    line-height: 18px;
+    max-width: 100%;
+    padding: 2px 2px 2px 2px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+#search {
+    width: 100%;
+    margin-top: 2px;
+    background-color: wheat;
+    border-width: 1px;    
+}
+
+#history {
+    height: 500px;
+    width: 25vw;
+}
+
+.historyCard {
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#fiveDayForecast{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.forecastCard{
+    width: fit-content;
+    border: 1px solid black;
+    background-color: darkcyan;
+    padding: 2px 2px 2px 2px;
+    overflow: hidden;
+    margin: 1px;
+}
+
+#currentCity {
+    padding: 5px;
+    border: 1px solid black
+}
+

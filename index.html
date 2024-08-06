@@ -14,7 +14,7 @@
     <header id="dashboard"> Weather Dashboard</header>
     <main class="grid-container">
         <div class="userSearch">
-            <form>
+            <form id="weatherForm">
                 <div>
                     <label for="city">City name:</label>
                     <input type="text" id="cityInput" placeholder="Ex: New York">
@@ -26,30 +26,18 @@
                 <button id="search" type="submit">Search</button>
             </form>
         </div>
+
         <div id="history">search history
-            <div class="historyCard">
-                <header>City Name</header>
-                <footer>State name</footer>
-            </div>
+                        <!-- content box to history-->
         </div>
 
-        <div id="currentCity">content box to display cities
-            <h1>Atlantic City</h1>
-            <div>temp</div>
-            <div>wind</div>
-            <div>Humid</div>
+        <div id="currentCity">
+            <!-- content box to display cities -->
         </div>
 
-        <section id="fiveDayForecast">
-            <div class="forecastCard">
-                <ul>
-                    <li>date</li>
-                    <li>temp</li>
-                    <li>wind</li>
-                    <li>humidity</li>
-                </ul>
-            </div>
-        </section>
+        <div id="forecast">
+            <!-- content box to display five day forecast -->
+        </div>
     </main>
 </body>
 

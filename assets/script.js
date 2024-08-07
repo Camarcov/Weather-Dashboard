@@ -1,17 +1,11 @@
 //url for api fetch request 
 const city = document.querySelector('#cityInput')
-const state = document.querySelector('#stateInput')
-
-// Retrieve the data from local storage
-const storedData = JSON.parse(localStorage.getItem('weatherData')) || []
-console.log(storedData)
 
 //gets the latitude and longitude of the city the user inputs, then uses that in the openweather forecast api to display the 5 day forecast in that area
 function weatherSearch() {
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city.value},${state.value},USA&appid=2cb03be675108368292ea1fa37be4149`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city.value}&appid=2cb03be675108368292ea1fa37be4149`)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             let lat = data[0].lat
             let lon = data[0].lon
             const forecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=2cb03be675108368292ea1fa37be4149`
@@ -26,15 +20,13 @@ function weatherSearch() {
 
 function renderFiveDay(data) {
     const fiveDayforecast = data.list;
-    console.log(fiveDayforecast)
 
-    // Filters out all data that doesnt match the 12pm timestamp
+    // filters out all data that doesnt match the 12pm timestamp
     const dailyForecast = fiveDayforecast.filter((item) =>
         item.dt_txt.includes("12:00:00")
     );
 
-    console.log(dailyForecast)
-
+    //for each item in the daily forecast makes card with the text set to forecast conditions
     dailyForecast.forEach((item) => {
         const date = new Date(item.dt * 1000).toLocaleDateString();
         const temp = item.main.temp + ' °F'
@@ -43,10 +35,10 @@ function renderFiveDay(data) {
         const wind = item.wind.speed
         const humidity = item.main.humidity
 
-        const forecastItem = document.createElement("div");
-        forecastItem.className = "forecastCard";
+        const forecastCard = document.createElement("div");
+        forecastCard.className = "forecastCard";
 
-        forecastItem.innerHTML = `
+        forecastCard.innerHTML = `
         <p>${date}</p>
         <img src="${icon}" alt="Weather icon" />
         <p>Temp: ${temp}</p>
@@ -54,11 +46,11 @@ function renderFiveDay(data) {
         <p>Winds: ${wind} mph</p>
         <p>${humidity}% Humidity </p>
       `;
-        document.querySelector('#forecast').append(forecastItem)
+        document.querySelector('#forecast').append(forecastCard)
     })
 }
 
-
+//fetches the current weather for the location you searched, adds all the conditions to the currentCity box
 function currentWeather(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=2cb03be675108368292ea1fa37be4149`)
         .then(response => response.json())
@@ -66,7 +58,7 @@ function currentWeather(lat, lon) {
             const currentCity = document.querySelector('#currentCity');
 
             const h2 = document.createElement('h2');
-            h2.textContent = 'Current Conditions for: ' + data.name;
+            h2.textContent = 'Current Conditions for ' + data.name;
             currentCity.appendChild(h2);
 
             const weatherConditions = document.createElement('p');
@@ -88,6 +80,8 @@ function currentWeather(lat, lon) {
             const icon = document.createElement('img');
             icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
             currentCity.appendChild(icon);
+            
+            city.value = ''
         });
 }
 
